@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", e => {
 const animalUrl = "http://localhost:3000/animals/7040"
 const commentsUrl = "http://localhost:3000/comments/" //use for POST
-
+// localStorage["user"] = 
+//make a user json table 
 
 const getAnimals = () => {
     fetch(animalUrl)
@@ -28,8 +29,13 @@ const getAnimals = () => {
         form.dataset.userId = commentObj.user_id
         // console.log(form)
         const ul = document.querySelector('.comments')
-        commentsLi = document.createElement('li')
+        const commentsLi = document.createElement('li')
         commentsLi.innerText = commentObj.text
+        commentsLi.dataset.commentId = commentObj.id
+        const deleteBtn = document.createElement("button")
+        deleteBtn.className = ("deleteBtn")
+        deleteBtn.textContent = "X"
+        commentsLi.append(deleteBtn)
         
         ul.appendChild(commentsLi)
       })
@@ -42,11 +48,31 @@ const getAnimals = () => {
       //console.log(likes.innerText.split(" ")[0])
       let counter =parseInt(likesNumber) +1
       likes.innerText = `${counter} bells`
-    }
-  })
-  const submitComment = () => {
+    }else if(event.target.textContent === "X") {
+        
+        const textLi = event.target.parentElement
+        textLi.remove()
+        const commentId = textLi.dataset.commentId
+        
+        const options = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          // body: JSON.stringify(jsObject)
+        }
+        
+        fetch(commentsUrl + commentId, options)
+        .then(response => response.json())
+        
+      }
+    })
+  
+  
     document.addEventListener('submit', (event) => {
       event.preventDefault()
+      console.log(event.target)
       const form = event.target
       const animalUl = document.querySelector('.comments')
       const animalId = animalUl.dataset.animalId
@@ -65,18 +91,50 @@ const getAnimals = () => {
       }
       fetch("http://localhost:3000/comments/", options)
       .then(response => response.json())
-      .then(data => {
+      .then(commentObj => {
         // console.log(data)
         const commentUl = document.querySelector('.comments')
         const commentLi = document.createElement('li')
-        commentLi.innerText = comment 
+        commentLi.innerHTML = comment
+        commentLi.dataset.commentId = commentObj.id
+        // console.log(comment)
         commentUl.append(commentLi)
-      })
+
+        const deleteBtn = document.createElement("button")
+        deleteBtn.textContent = "X"
+        //const commentLis = document.querySelectorAll(".comments>li")
+        commentLi.append(deleteBtn)
     })
-  } 
+  })
+
+
+// const deleteComment = () => {
+//   document.addEventListener('click', (event) => {
+//     event.preventDefault()
+//     if (event.target.textContent === "X") {
+    
+//     const textLi = event.target.parentElement
+//     textLi.remove()
+//     const commentId = textLi.dataset.commentId
+
+//     const options = {
+//       method: 'DELETE',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Accept': 'application/json',
+//       },
+//       // body: JSON.stringify(jsObject)
+//     }
+
+//     fetch(commentsUrl + commentId, options)
+//     .then(response => response.json())
+
+//     }
+//   })
+// }
 
 
   getAnimals()
-  submitComment()
+  // deleteComment()
 
 })
