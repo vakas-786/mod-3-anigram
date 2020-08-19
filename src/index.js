@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", e => {
-const animalUrl = "http://localhost:3000/animals/7040"
+const animalUrl = "http://localhost:3000/animals/7040"    //"http://localhost:3000/animals/7040" and change user_id to 6 on ln 87
 const commentsUrl = "http://localhost:3000/comments/" //use for POST
+const usersUrl = "http://localhost:3000/users/"
 // localStorage["user"] = 
 //make a user json table 
 
@@ -45,7 +46,6 @@ const getAnimals = () => {
     if(event.target.textContent === "🔔") {
       const likes = event.target.previousElementSibling
       let likesNumber = parseInt(likes.innerText.split(" ")[0])
-      //console.log(likes.innerText.split(" ")[0])
       let counter =parseInt(likesNumber) +1
       likes.innerText = `${counter} bells`
     }else if(event.target.textContent === "X") {
@@ -60,7 +60,6 @@ const getAnimals = () => {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          // body: JSON.stringify(jsObject)
         }
         
         fetch(commentsUrl + commentId, options)
@@ -72,16 +71,14 @@ const getAnimals = () => {
   
     document.addEventListener('submit', (event) => {
       event.preventDefault()
-      console.log(event.target)
-      const form = event.target
-      const animalUl = document.querySelector('.comments')
-      const animalId = animalUl.dataset.animalId
-      const userId = form.dataset.userId
-      // console.log(userId)
-    
-      comment = form.comment.value 
+        const form = event.target
+        const animalUl = document.querySelector('.comments')
+        const animalId = animalUl.dataset.animalId
+        const userId = form.dataset.userId
+      
+        comment = `User: ${form.comment.value}`
 
-      const options = {
+        const options = {
         method: 'POST',
         headers: {
           "content-type": "application/json",
@@ -102,9 +99,11 @@ const getAnimals = () => {
 
         const deleteBtn = document.createElement("button")
         deleteBtn.textContent = "X"
-        //const commentLis = document.querySelectorAll(".comments>li")
         commentLi.append(deleteBtn)
+        commentForm = document.querySelector(".comment-input")
+        commentForm.value = ""
     })
+   
   })
 
 
