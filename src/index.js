@@ -80,7 +80,7 @@ const getAnimals = () => {
       // console.log(userId)
     
       comment = form.comment.value 
-
+      //fetchGenerator
       const options = {
         method: 'POST',
         headers: {
