@@ -125,14 +125,19 @@ const getAnimals = () => {
   
     document.addEventListener('submit', (event) => {
       event.preventDefault()
-        const form = event.target
-        const animalUl = document.querySelector('.comments')
-        const animalId = animalUl.dataset.animalId
-        const userId = form.dataset.userId
-      
-        comment = `User: ${form.comment.value}`
 
-        const options = {
+      console.log(event.target)
+      const form = event.target
+      const animalUl = document.querySelector('.comments')
+      const animalId = animalUl.dataset.animalId
+      const userId = form.dataset.userId
+      // console.log(userId)
+    
+      comment = form.comment.value 
+      //fetchGenerator
+      const options = {
+
+        
         method: 'POST',
         headers: {
           "content-type": "application/json",
