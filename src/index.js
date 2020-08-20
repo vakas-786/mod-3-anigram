@@ -2,11 +2,14 @@ document.addEventListener("DOMContentLoaded", e => {
 const animalUrl = "http://localhost:3000/animals/"    //"http://localhost:3000/animals/7040" and change user_id to 6 on ln 87
 const commentsUrl = "http://localhost:3000/comments/" //use for POST
 const usersUrl = "http://localhost:3000/users/"
+const firstUrl = "http://localhost:3000/animals/7040" 
 // localStorage["user"] = 
 //make a user json table 
 
+
+
 const getAnimals = () => {
-    fetch(animalUrl)
+    fetch(firstUrl)
     .then(response => response.json())
     .then(animals => renderAnimal(animals))
     
@@ -16,10 +19,17 @@ const getAnimals = () => {
       const commentsUl = document.querySelector('.comments')
       commentsUl.dataset.animalId = animals.id
       const photo = document.querySelector(".image")
+      const quoteBox = document.querySelector(".speech")
+      quoteBox.innerText = animals.quote
+      const iconImg = document.createElement('img')
+      iconImg.src = animals.icon_url
+      quoteBox.append(iconImg)
       photo.src = animals.image_url
+
       const animalName = document.querySelector(".title")
       animalName.innerHTML = `<h2 class="title">${animals.name} the ${animals.species}</h2>`
-
+      
+      
       // console.log(animals.comments)
       const commentArray = animals.comments
       
@@ -37,6 +47,7 @@ const getAnimals = () => {
         deleteBtn.className = ("deleteBtn")
         deleteBtn.textContent = "🗑"
         commentsLi.append(deleteBtn)
+        
         
         ul.appendChild(commentsLi)
       })
@@ -64,22 +75,30 @@ const getAnimals = () => {
         
         fetch(commentsUrl + commentId, options)
         .then(response => response.json())
-        
-      }else if(event.target.textContent === "Generate") {
+      }else if(event.target.textContent === "Meet a Villager") {
         fetch(animalUrl)
         .then(response => response.json())
         .then(animals => renderAnimal(animals))
 
         const renderAnimal = (animals) => {
+          const quoteBox = document.querySelector(".speech")
+          quoteBox.innerText = animals.quote
+          const iconImg = document.createElement('img')
+          iconImg.src = animals.icon_url
+          const pTag = document.querySelector("p")
+          pTag.append(iconImg)
+ 
           const commentsUl = document.querySelector('.comments')
           commentsUl.dataset.animalId = animals.id
           const photo = document.querySelector(".image")
           photo.src = animals.image_url
           const animalName = document.querySelector(".title")
           animalName.innerHTML = `<h2 class="title">${animals.name} the ${animals.species}</h2>`
-    
-          // console.log(animals.comments)
+          likesNum = document.querySelector(".likes")
+          const firstNum =parseInt(likesNum.innerText.split(" ")[0])
+          likesNum.innerText = `${firstNum*0} bells`
           const commentArray = animals.comments
+          commentsUl.innerHTML = ""
           
           commentArray.forEach(commentObj => {
             
@@ -124,9 +143,9 @@ const getAnimals = () => {
           "content-type": "application/json",
           "accept": "application/json"
         },
-        body: JSON.stringify( {user_id: 1, animal_id: animalId, text: comment})
+        body: JSON.stringify( {user_id: 6, animal_id: animalId, text: comment} )
       }
-      fetch("http://localhost:3000/comments/", options)
+      fetch(commentsUrl, options)
       .then(response => response.json())
       .then(commentObj => {
         // console.log(data)
