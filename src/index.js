@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", e => {
-const animalUrl = "http://localhost:3000/animals/"    //"http://localhost:3000/animals/7040" and change user_id to 6 on ln 87
-const commentsUrl = "http://localhost:3000/comments/" //use for POST
+const animalUrl = "http://localhost:3000/animals/"    
+const commentsUrl = "http://localhost:3000/comments/" 
 const usersUrl = "http://localhost:3000/users/"
-const firstUrl = "http://localhost:3000/animals/7040" 
-// localStorage["user"] = 
-//make a user json table 
+const firstUrl = "http://localhost:3000/animals/7040" //change endpoint depending on first Animal ID
+//change userId as well to the user's ID after seeding 
+
+
 
 
 
