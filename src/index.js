@@ -20,9 +20,13 @@ const getAnimals = () => {
       commentsUl.dataset.animalId = animals.id
       const photo = document.querySelector(".image")
       const quoteBox = document.querySelector(".speech")
+      const personality = document.querySelector(".personality")
+      personality.innerHTML = `<h3 class="personality">Mood: ${animals.personality}</h3>`
       quoteBox.innerText = animals.quote
       const iconImg = document.createElement('img')
       iconImg.src = animals.icon_url
+      iconImg.width = 70
+      iconImg.height = 70
       quoteBox.append(iconImg)
       photo.src = animals.image_url
 
@@ -85,6 +89,10 @@ const getAnimals = () => {
           quoteBox.innerText = animals.quote
           const iconImg = document.createElement('img')
           iconImg.src = animals.icon_url
+          iconImg.width = 70
+          iconImg.height = 70
+          const personality = document.querySelector(".personality")
+          personality.innerHTML = `<h3 class="personality">Mood: ${animals.personality}</h3>`
           const pTag = document.querySelector("p")
           pTag.append(iconImg)
  
@@ -126,7 +134,7 @@ const getAnimals = () => {
     document.addEventListener('submit', (event) => {
       event.preventDefault()
 
-      console.log(event.target)
+      // console.log(event.target)
       const form = event.target
       const animalUl = document.querySelector('.comments')
       const animalId = animalUl.dataset.animalId
@@ -134,6 +142,7 @@ const getAnimals = () => {
       // console.log(userId)
     
       comment = form.comment.value 
+      
       //fetchGenerator
       const options = {
 
@@ -148,23 +157,28 @@ const getAnimals = () => {
       fetch(commentsUrl, options)
       .then(response => response.json())
       .then(commentObj => {
-        // console.log(data)
-        const commentUl = document.querySelector('.comments')
-        const commentLi = document.createElement('li')
-        commentLi.innerHTML = comment
-        commentLi.dataset.commentId = commentObj.id
-        // console.log(comment)
-        commentUl.append(commentLi)
+        
+        if(comment === "") {
+          alert("NO EMPTY COMMENTS IN MY VILLAGE!")
+        }else {
+          const commentUl = document.querySelector('.comments')
+          const commentLi = document.createElement('li')
 
-        const deleteBtn = document.createElement("button")
-        deleteBtn.textContent = "🗑"
-        commentLi.append(deleteBtn)
-        commentForm = document.querySelector(".comment-input")
-        commentForm.value = ""
-    })
-   
-  })
-
+          commentLi.innerHTML = comment
+          commentLi.dataset.commentId = commentObj.id
+          // console.log(comment)
+          commentUl.append(commentLi)
+          
+          const deleteBtn = document.createElement("button")
+          deleteBtn.textContent = "🗑"
+          commentLi.append(deleteBtn)
+          commentForm = document.querySelector(".comment-input")
+          commentForm.value = ""
+        }
+        })
+        
+      })
+      
 
   getAnimals()
   // deleteComment()
