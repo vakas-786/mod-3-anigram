@@ -2,19 +2,14 @@ document.addEventListener("DOMContentLoaded", e => {
 const animalUrl = "http://localhost:3000/animals/"    
 const commentsUrl = "http://localhost:3000/comments/" 
 const usersUrl = "http://localhost:3000/users/"
-const firstUrl = "http://localhost:3000/animals/7040" //change endpoint depending on first Animal ID
-//change userId as well to the user's ID after seeding 
-
-
-
-
+const firstUrl = "http://localhost:3000/first" 
 
 const getAnimals = () => {
     fetch(firstUrl)
     .then(response => response.json())
     .then(animals => renderAnimal(animals))
-    
   }
+  
   
     const renderAnimal = (animals) => {
       const commentsUl = document.querySelector('.comments')
@@ -35,15 +30,12 @@ const getAnimals = () => {
       animalName.innerHTML = `<h2 class="title">${animals.name} the ${animals.species}</h2>`
       
       
-      // console.log(animals.comments)
       const commentArray = animals.comments
       
       commentArray.forEach(commentObj => {
         
-        // console.log(commentObj)
         const form = document.querySelector('.comment-form')
         form.dataset.userId = commentObj.user_id
-        // console.log(form)
         const ul = document.querySelector('.comments')
         const commentsLi = document.createElement('li')
         commentsLi.innerText = commentObj.text
@@ -110,11 +102,8 @@ const getAnimals = () => {
           commentsUl.innerHTML = ""
           
           commentArray.forEach(commentObj => {
-            
-            // console.log(commentObj)
             const form = document.querySelector('.comment-form')
             form.dataset.userId = commentObj.user_id
-            // console.log(form)
             const ul = document.querySelector('.comments')
             const commentsLi = document.createElement('li')
             commentsLi.innerText = commentObj.text
@@ -127,7 +116,6 @@ const getAnimals = () => {
             ul.appendChild(commentsLi)
           })
       }
-
       }
     })
   
@@ -135,53 +123,52 @@ const getAnimals = () => {
     document.addEventListener('submit', (event) => {
       event.preventDefault()
 
-      // console.log(event.target)
+
       const form = event.target
       const animalUl = document.querySelector('.comments')
       const animalId = animalUl.dataset.animalId
-      const userId = form.dataset.userId
-      // console.log(userId)
-    
-      comment = form.comment.value 
-      
-      //fetchGenerator
-      const options = {
-
-        
-        method: 'POST',
-        headers: {
-          "content-type": "application/json",
-          "accept": "application/json"
-        },
-        body: JSON.stringify( {user_id: 6, animal_id: animalId, text: comment} )
-      }
-      fetch(commentsUrl, options)
+      fetch(usersUrl)
       .then(response => response.json())
-      .then(commentObj => {
-        
-        if(comment === "") {
-          alert("NO EMPTY COMMENTS IN MY VILLAGE!")
-        }else {
-          const commentUl = document.querySelector('.comments')
-          const commentLi = document.createElement('li')
-
-          commentLi.innerHTML = comment
-          commentLi.dataset.commentId = commentObj.id
-          // console.log(comment)
-          commentUl.append(commentLi)
+      .then(user => {
+        let userId = user.map(user => user.id)
+        comment = form.comment.value 
+        debugger
+        const options = {
           
-          const deleteBtn = document.createElement("button")
-          deleteBtn.textContent = "🗑"
-          commentLi.append(deleteBtn)
-          commentForm = document.querySelector(".comment-input")
-          commentForm.value = ""
+          
+          method: 'POST',
+          headers: {
+            "content-type": "application/json",
+            "accept": "application/json"
+          },
+          body: JSON.stringify( {user_id: userId[0], animal_id: animalId, text: comment} )
         }
+        fetch(commentsUrl, options)
+        .then(response => response.json())
+        .then(commentObj => {
+          
+          if(comment === "") {
+            alert("NO EMPTY COMMENTS IN MY VILLAGE!")
+          }else {
+            const commentUl = document.querySelector('.comments')
+            const commentLi = document.createElement('li')
+            
+            commentLi.innerHTML = comment
+            commentLi.dataset.commentId = commentObj.id
+            commentUl.append(commentLi)
+            
+            const deleteBtn = document.createElement("button")
+            deleteBtn.textContent = "🗑"
+            commentLi.append(deleteBtn)
+            commentForm = document.querySelector(".comment-input")
+            commentForm.value = ""
+          }
+        })
         })
         
       })
       
 
   getAnimals()
-  // deleteComment()
 
 })
