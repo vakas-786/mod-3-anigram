@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", e => {
-const animalUrl = "http://localhost:3000/animals/"    
-const commentsUrl = "http://localhost:3000/comments/" 
-const usersUrl = "http://localhost:3000/users/"
-const firstUrl = "http://localhost:3000/first" 
+const animalUrl = "https://serene-caverns-61931.herokuapp.com/animals/"    
+const commentsUrl = "https://serene-caverns-61931.herokuapp.com/comments/" 
+const usersUrl = "https://serene-caverns-61931.herokuapp.com/users/"
+const firstUrl = "https://serene-caverns-61931.herokuapp.com/first" 
 
 const getAnimals = () => {
     fetch(firstUrl)
