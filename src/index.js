@@ -132,7 +132,6 @@ const getAnimals = () => {
       .then(user => {
         let userId = user.map(user => user.id)
         comment = form.comment.value 
-        debugger
         const options = {
           
           
