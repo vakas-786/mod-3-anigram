@@ -88,8 +88,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Authors
 
-@vakas-786
-@jzhouerm
+* <a href='https://github.com/vakas-786/'> @vakas-786 </a>
+* <a href='https://github.com/jzhouerm/'> @jzhouerm </a>
 
 
 
