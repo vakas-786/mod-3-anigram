@@ -44,21 +44,40 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+1. Clone the backend repo
 ```sh
-npm install npm@latest -g
+git clone https://github.com/vakas-786/mod-3-project-BACKEND.git
+```
+2. Install required gems
+```sh
+bundle install
+```
+3. Create a local database
+```sh
+rails db:create
+```
+4. Migrate 
+```sh
+rails db:migrate
+```
+5. Seed the data 
+```sh
+rails db:seed
+```
+6. Start the server
+```sh
+rails s
 ```
 
 ### Installation
 
 1. Clone the repo
 ```sh
-git clone https://github.com/github_username/repo_name.git
+https://github.com/vakas-786/mod-3-anigram.git
 ```
-2. Install NPM packages
+2. Open the app
 ```sh
-npm install
+open index.html
 ```
 
 <!-- LICENSE -->
