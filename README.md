@@ -88,8 +88,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Authors
 
-* @vakas-786
-* @jzhouerm
+@vakas-786
+@jzhouerm
 
 
 
