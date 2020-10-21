@@ -61,21 +61,17 @@ git clone https://github.com/github_username/repo_name.git
 npm install
 ```
 
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-
-
-<!-- ACKNOWLEDGEMENTS -->
 ## Authors
 
 * @vakas-786
 * @jzhouerm
-* 
+
 
 
 
