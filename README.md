@@ -80,10 +80,6 @@ https://github.com/vakas-786/mod-3-anigram.git
 open index.html
 ```
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 
 ## Authors
