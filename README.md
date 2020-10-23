@@ -9,7 +9,7 @@
   <h3 align="center">YOUR_TITLE</h3>
 
   <p align="center">
-    A vanilla JavaScript project that utilized a Rails backend to generate random instagram like social media posts. The data was fetched using the ACNH API and seeded in the Rails API that I built for this project. Users can leave a comment on each character, refresh to return to the first character "Cyrano", and listen to a song from the ANCH API. 
+    A vanilla JavaScript project that utilized a Rails backend to generate random instagram like social media posts. The data was fetched from the ACNH API and seeded in the Rails API that was built for this project. Users can leave a comment on each character, refresh to return to the first character "Cyrano", and listen to a song from the ANCH API. 
     <br />
     <a href="https://vakas-786.github.io/mod-3-anigram/index.html">View Demo</a>
   </p>
