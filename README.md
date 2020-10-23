@@ -11,9 +11,6 @@
   <p align="center">
     YOUR_SHORT_DESCRIPTION
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://vakas-786.github.io/mod-3-anigram/index.html">View Demo</a>
   </p>
 </p>
