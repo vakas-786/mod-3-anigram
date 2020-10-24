@@ -6,7 +6,7 @@
     <img src="/demo.gif">
   </a>
 
-  <h1 align="center">Anigram!</h1>
+  <h1 align="center">Anigram</h1>
 
   <p align="center">
     A vanilla JavaScript project that utilized a Rails backend to generate random instagram like social media posts. The data was fetched from the ACNH API and seeded in the Rails API that was built for this project. Users can leave a comment on each character, refresh to return to the first character "Cyrano", and listen to a song from the ANCH API. 
