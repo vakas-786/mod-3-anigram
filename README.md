@@ -28,6 +28,79 @@
 * HTML5
 * CSS3
 
+# Technical Challenges
+The information for the project was recieved using the /villages endpoint from the ACNH API. The endpoint provided the follwing data:
+```sh
+{
+id: 1,
+file-name: "ant00",
+name: {
+name-USen: "Cyrano",
+name-EUen: "Cyrano",
+name-EUde: "Theo",
+name-EUes: "Cirano",
+name-USes: "Cirano",
+name-EUfr: "Cyrano",
+name-USfr: "Cyrano",
+name-EUit: "Cirano",
+name-EUnl: "Cyrano",
+name-CNzh: "阳明",
+name-TWzh: "陽明",
+name-JPja: "さくらじま",
+name-KRko: "사지마",
+name-EUru: "Сирано"
+},
+personality: "Cranky",
+birthday-string: "March 9th",
+birthday: "9/3",
+species: "Anteater",
+gender: "Male",
+subtype: "B",
+hobby: "Education",
+catch-phrase: "ah-CHOO",
+icon_uri: "https://acnhapi.com/v1/icons/villagers/1",
+image_uri: "https://acnhapi.com/v1/images/villagers/1",
+bubble-color: "#194c89",
+text-color: "#fffad4",
+saying: "Don't punch your nose to spite your face.",
+catch-translations: {
+catch-USen: "ah-CHOO",
+catch-EUen: "ah-CHOO",
+catch-EUde: "schneuf",
+catch-EUes: "achús",
+catch-USes: "achús",
+catch-EUfr: "ATCHOUM",
+catch-USfr: "ATCHOUM",
+catch-EUit: "ett-CCIÙ",
+catch-EUnl: "ha-TSJOE",
+catch-CNzh: "有的",
+catch-TWzh: "有的",
+catch-JPja: "でごわす",
+catch-KRko: "임돠",
+catch-EUru: "апчхи"
+}
+},
+```
+In order to retrieve the required nested data (we only wanted the english names, names were provided in other languages) and seed it into our database we implemented the following code: 
+
+```sh
+require 'net/http'
+ANIMAL_URL = 'https://acnhapi.com/v1a/villagers/'
+
+def get_animals(animal_url)
+    uri = URI.parse(animal_url)
+    response = Net::HTTP.get_response(uri)
+    animal_obj = JSON.parse(response.body)
+ 
+    animal_obj.each do |characters|
+        name = characters["name"]["name-USen"]
+        Animal.create(name: name, image_url: characters["image_uri"], personality: characters["personality"], quote: characters["saying"], icon_url: characters["icon_uri"], species: characters["species"])
+    end 
+end 
+
+get_animals(ANIMAL_URL) 
+```
+
 
 
 <!-- GETTING STARTED -->
