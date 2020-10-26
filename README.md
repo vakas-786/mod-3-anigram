@@ -29,7 +29,7 @@
 * CSS3
 
 # Technical Challenges
-The information for the project was recieved using the /villages endpoint from the ACNH API. The endpoint provided the follwing data:
+The information for the project was provided by the /villages endpoint from the ACNH API. Here is an example of the data the endpoint provided:
 ```sh
 {
 id: 1,
